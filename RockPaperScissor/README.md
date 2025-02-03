@@ -64,3 +64,6 @@ Points are You : 1 AI : 1
 
 You won
 ```
+
+## License:
+This project is open source and free to use.
