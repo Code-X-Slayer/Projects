@@ -1,0 +1,89 @@
+---
+config:
+  theme: redux-dark-color
+  er:
+    fill: "#3B3B3B"  # Dark grey background
+---
+erDiagram
+  TITLE ||--o{ TITLE_ALIAS : has_aliases
+  TITLE ||--o{ TITLE_CAST_CREW : has_cast_crew
+  TITLE ||--|| TITLE_CREW : has_crew_summary
+  TITLE ||--o{ TITLE_DIRECTOR : has_directors
+  TITLE ||--o{ TITLE_GENRE : has_genres
+  TITLE ||--|| TITLE_RATING : has_rating
+  TITLE ||--o{ TITLE_WRITER : has_writers
+  TITLE ||--o{ EPISODE : has_episodes
+  PERSON ||--o{ TITLE_CAST_CREW : is_cast_or_crew
+  PERSON ||--o{ TITLE_DIRECTOR : is_director
+  PERSON ||--o{ TITLE_WRITER : is_writer
+  PERSON ||--o{ PERSON_KNOWN_TITLE : has_known_titles
+  PERSON ||--o{ PERSON_PROFESSION : has_professions
+  PERSON_KNOWN_TITLE }o--|| TITLE : known_titles_link
+  EPISODE }o--|| TITLE : belongs_to_series
+  TITLE {
+    varchar tconst PK
+    varchar title_type
+    text primary_title
+    text original_title
+    tinyint isAdult
+    char startYear
+    char endYear
+    int runtimeMinutes
+  }
+  TITLE_ALIAS {
+    varchar titleId PK, FK
+    int ordering PK
+    text title
+    varchar region
+    varchar language
+    varchar attributes
+    tinyint isOriginalTitle
+  }
+  TITLE_CAST_CREW {
+    varchar tconst PK, FK
+    int ordering PK
+    varchar nconst FK
+    varchar category
+    varchar job
+    text characters
+  }
+  TITLE_CREW {
+    varchar tconst PK, FK
+  }
+  TITLE_DIRECTOR {
+    varchar tconst PK, FK
+    varchar nconst PK, FK
+  }
+  TITLE_GENRE {
+    varchar tconst PK, FK
+    varchar genre PK
+  }
+  TITLE_RATING {
+    varchar tconst PK, FK
+    float averageRating
+    int numVotes
+  }
+  TITLE_WRITER {
+    varchar tconst PK, FK
+    varchar nconst PK, FK
+  }
+  EPISODE {
+    varchar tconst PK
+    varchar parent_tconst FK
+    int season_number
+    int episode_number
+  }
+  PERSON {
+    varchar nconst PK
+    varchar primary_name
+    char birth_year
+    char death_year
+  }
+  PERSON_KNOWN_TITLE {
+    varchar nconst PK, FK
+    varchar tconst PK, FK
+  }
+  PERSON_PROFESSION {
+    varchar nconst PK, FK
+    varchar profession PK
+  }

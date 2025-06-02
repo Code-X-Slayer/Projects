@@ -1,0 +1,9 @@
+# Ignore all .tsv files (IMDb dataset)
+*.tsv
+
+# Ignore compressed IMDb files
+*.tsv.gz
+
+# Ignore any backups or temp files
+*.bak
+*.tmp
